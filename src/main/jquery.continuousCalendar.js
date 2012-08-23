@@ -102,9 +102,14 @@
       function initCalendarTable() {
         if(scrollContent) return
         var headerTable = $('<table>').addClass('calendarHeader').append(headerRow())
-        bodyTable = $('<table>').addClass('calendarBody').append(calendarBody())
-        scrollContent = $('<div>').addClass('calendarScrollContent').append(bodyTable)
-        calendarContainer.append(headerTable).append(scrollContent)
+        bodyTable = $('<table>').addClass('calendarBody').addClass('overview').append(calendarBody())
+        scrollContent = $('<div>').addClass('calendarScrollContent').addClass('viewport').append(bodyTable)
+        calendarContainer.append(headerTable)
+          .append(
+          $('<div class="tinyscrollbar"></div>')
+            .append('<div class="scrollbar"> <div class="track"> <div class="thumb"> <div class="end"></div> </div> </div> </div>')
+            .append(scrollContent))
+
         dateCells = $('td.date', container).get()
         calendar.initState()
         calendar.addRangeLengthLabel()
